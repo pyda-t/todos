@@ -1,0 +1,11 @@
+@import '../../styles/utils';
+
+.TodoList {
+  &__Item {
+    @include adaptive-value('margin-bottom', 20, 10);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

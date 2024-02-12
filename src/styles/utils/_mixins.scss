@@ -1,0 +1,20 @@
+@mixin onMobile {
+  @media (max-width: 500px) {
+    @content;
+  }
+}
+
+@mixin square ($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin adaptive-value($property, $maxSize, $minSize) {
+  $difference: $maxSize - $minSize;
+
+  #{$property}: $maxSize + px;
+
+  @media (max-width: #{$maxWidthContainer + px}) {
+    #{$property}: calc(#{$minSize + px} + #{$difference} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+  }
+}

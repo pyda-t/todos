@@ -1,0 +1,32 @@
+@import './styles/utils';
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  @include adaptive-value('padding', 50, 20);
+  @extend %main-text;
+  background-color: $c-blue;
+
+  &__Title {
+    @extend %h1;
+    text-align: center;
+  }
+
+  &__Content {
+    align-self: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    @include adaptive-value('row-gap', 40, 20);
+    width: 100%;
+    max-width: 700px;
+    @include adaptive-value('padding-block', 50, 30);
+    padding-block: 30px;
+  }
+
+  &__Text{
+    @extend %secondary-text;
+    text-align: center;
+  }
+}

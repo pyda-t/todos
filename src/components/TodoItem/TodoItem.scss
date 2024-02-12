@@ -1,0 +1,67 @@
+@import '../../styles/utils';
+
+$icon-size: 35px;
+$padding-inline: $icon-size + 10px;
+
+.TodoItem {
+  position: relative;
+  width: 100%;
+  padding-block: 10px;
+  padding-inline: $padding-inline;
+  border-bottom: 2px solid $c-gray;
+  transition-duration: $amin-time;
+
+  &--completed {
+    border-color: $c-green;
+  }
+
+  &__Label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    margin-right: 10px;
+    @include square($icon-size);
+    cursor: pointer;
+  }
+
+  &__Icon {
+    @include square(100%);
+
+    path {
+      stroke: $c-black;
+    }
+
+    &--green {
+      path {
+        stroke: $c-green;
+      }
+    }
+
+    &--red {
+      path {
+        stroke: none;
+        fill: $c-red;
+      }
+    }
+  }
+
+  &__CheckInput {
+    display: none;
+  }
+
+  &__TextInput {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    @extend %main-text;
+    color: inherit;
+  }
+
+  &__Button {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+}

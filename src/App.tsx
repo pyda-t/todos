@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FunctionComponent, useMemo, useState } from 'react';
+import { useGetTodosQuery } from './redux';
 
-function App() {
+// Styles
+import './App.scss';
+
+// Types
+import { TodoFilters } from './types/TodoFilters';
+
+// Components
+import { AddForm } from './components/AddForm';
+import { TodosList } from './components/TodosList';
+import { Controls } from './components/Controls';
+
+export const App: FunctionComponent = () => {
+  const {data: todos = []} = useGetTodosQuery();
+  const [filter, setFilter] = useState<TodoFilters>('');
+
+  const visibleTodos = useMemo(
+    () => {
+      switch (filter) {
+        case 'active':
+          return todos.filter(todo => !todo.completed);
+
+        case 'completed':
+          return todos.filter(todo => todo.completed);
+
+        default:
+          return todos;
+      }
+    },
+    [filter, todos],
+  );
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="App__Title">Todos</h1>
+
+      <div className="App__Content">
+        <AddForm />
+
+        {!!todos.length && (
+          <>
+            <TodosList todos={visibleTodos} />
+
+            <Controls filter={filter} setFilter={setFilter} />
+          </>
+        )}
+      </div>
+
+      <p className="App__Text">Double click on the Todo text to edit it</p>
     </div>
   );
-}
-
-export default App;
+};

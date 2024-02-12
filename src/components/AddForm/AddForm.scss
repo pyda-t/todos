@@ -1,0 +1,45 @@
+@import '../../styles/utils';
+
+$maxFieldPadding: 15;
+$minFieldPadding: 5;
+
+
+.AddForm {
+  position: relative;
+  @include adaptive-value('padding-block', $maxFieldPadding, $minFieldPadding);
+  @include adaptive-value('padding-right', $maxFieldPadding, $minFieldPadding);
+  @include adaptive-value('padding-left', 70, 50);
+  height: max-content;
+  border-radius: 50px;
+  background-color: $c_white;
+
+  &__Field {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    @extend %field-text;
+  }
+
+  &__Button {
+    position: absolute;
+    top: 50%;
+    @include adaptive-value('left', $maxFieldPadding, $minFieldPadding);
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__ButtonIcon {
+    path {
+      fill: $c-gray;
+      transition-duration: $amin-time;
+    }
+
+    &--green {
+      path {
+        fill: #1A5A4C;
+      }
+    }
+  }
+}

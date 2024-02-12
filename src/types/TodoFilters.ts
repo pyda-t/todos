@@ -1,0 +1,1 @@
+export type TodoFilters = '' | 'active' | 'completed';
